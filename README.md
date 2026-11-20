@@ -2,13 +2,13 @@
 
 React UI components, Tailwind CSS themes, layouts, hooks, and TanStack integrations for the **gorth-io** ecosystem.
 
-| Includes | Public imports |
-| --- | --- |
-| Custom components | `@gorth-io/primitive/custom/*` |
-| Default components and patterns | `@gorth-io/primitive/default/*`, `pattern/*` |
-| Layouts, providers, and hooks | `@gorth-io/primitive/layouts/*`, `providers/*`, `hooks/*` |
-| TanStack, icons, and utilities | `@gorth-io/primitive/cores/*`, `utils/*` |
-| Shared styles and assets | `@gorth-io/primitive/globals.css`, `assets/*` |
+| Includes                        | Public imports                                            |
+| ------------------------------- | --------------------------------------------------------- |
+| Custom components               | `@gorth-io/primitive/custom/*`                            |
+| Default components and patterns | `@gorth-io/primitive/default/*`, `pattern/*`              |
+| Layouts, providers, and hooks   | `@gorth-io/primitive/layouts/*`, `providers/*`, `hooks/*` |
+| TanStack, icons, and utilities  | `@gorth-io/primitive/cores/*`, `utils/*`                  |
+| Shared styles and assets        | `@gorth-io/primitive/globals.css`, `assets/*`             |
 
 ## Installation
 
@@ -51,6 +51,46 @@ export function Demo() {
   return <Button>Click me</Button>;
 }
 ```
+
+## Action progress in Next.js
+
+`ApplicationProvider` includes action progress automatically. `ApplicationLayout`
+already mounts that provider, so applications do not need another progress wrapper.
+
+```tsx
+"use client";
+
+import { Button } from "@gorth-io/primitive/custom/button";
+import { useProgress } from "@gorth-io/primitive/hooks/use-progress";
+
+export function SaveButton({ save }: { save: () => Promise<void> }) {
+  const { pending, run } = useProgress();
+  return (
+    <Button
+      disabled={pending}
+      onClick={() =>
+        void run(save, {
+          errorMessage: "Unable to save. Please try again.",
+        })
+      }
+    >
+      Save
+    </Button>
+  );
+}
+```
+
+The hook exposes `start`, `stop`, `pending`, `run`, `finish`, and `fail`.
+Actions share an immediate lock across consumers. Normal successful work finishes
+automatically; `{ keepUntilNavigation: true }` keeps progress and the lock until
+the pathname changes or the browser restores the page from its Back/Forward cache.
+Errors finish progress, show a generic or explicitly supplied toast message, and
+optionally call `onError`. Raw exception details are not shown in the toast.
+Late results from an older action cannot stop or report errors for a newer action.
+
+This hook uses Next navigation and requires the Next `ApplicationProvider`.
+The existing `cores/progress/next` export remains the unmodified BProgress API for
+low-level navigation integration. Import the action hook through `hooks/use-progress`.
 
 ## Development
 

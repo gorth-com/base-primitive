@@ -1,6 +1,6 @@
 // "use client"
 
-// /* eslint-disable react-hooks/rules-of-hooks -- These functions build service definitions; they do not execute React hooks. */
+// /* oxlint-disable react/rules-of-hooks -- These functions build service definitions; they do not execute React hooks. */
 
 // import { z } from "zod"
 // import {

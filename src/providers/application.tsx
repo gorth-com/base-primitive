@@ -1,11 +1,6 @@
 "use client";
 
-import React, {
-  PropsWithChildren,
-  Suspense,
-  useEffect,
-  useRef,
-} from "react";
+import React, { PropsWithChildren, Suspense, useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/custom/toast";
@@ -15,6 +10,7 @@ import {
   AppProgressProvider as ProgressProvider,
   useProgress,
 } from "@bprogress/next";
+import { ProgressProvider as ActionProgressProvider } from "@/hooks/use-progress";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/providers/theme";
 import { FontProvider } from "@/providers/font";
@@ -106,7 +102,9 @@ export function ApplicationProvider({
                   <SuspenseProgress />
                 </Suspense>
                 <Toaster>
-                  <TooltipProvider>{children}</TooltipProvider>
+                  <ActionProgressProvider>
+                    <TooltipProvider>{children}</TooltipProvider>
+                  </ActionProgressProvider>
                 </Toaster>
               </ProgressProvider>
             </LayoutProvider>

@@ -5,11 +5,11 @@ import * as React from "react"
 
 function useIsomorphicLayoutEffect(effect: React.EffectCallback, deps?: React.DependencyList) {
   if (typeof window !== "undefined") {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  // oxlint-disable-next-line react/rules-of-hooks
     // biome-ignore lint/correctness/useHookAtTopLevel: Intentional isomorphic hook pattern for SSR compatibility
     React.useLayoutEffect(effect, deps)
   } else {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+  // oxlint-disable-next-line react/rules-of-hooks
     // biome-ignore lint/correctness/useHookAtTopLevel: Intentional isomorphic hook pattern for SSR compatibility
     React.useEffect(effect, deps)
   }

@@ -416,7 +416,7 @@ export const BlinkingParticles: React.FC<BlinkingParticlesProps> = ({
 
       window.removeEventListener("resize", handleResize);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [
     color,
     quantity,
@@ -433,12 +433,12 @@ export const BlinkingParticles: React.FC<BlinkingParticlesProps> = ({
 
   React.useEffect(() => {
     onMouseMove();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [mousePosition.x, mousePosition.y]);
 
   React.useEffect(() => {
     initCanvas();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [refresh]);
 
   return (
