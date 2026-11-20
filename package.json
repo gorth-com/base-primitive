@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gorth-io/base-primitive.git"
+    "url": "git+https://github.com/gorth-com/base-primitive.git"
   },
   "publishConfig": {
     "access": "public",
